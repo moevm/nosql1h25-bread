@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Профиль</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body class="profile-body">
+
+  <div id="notification" class="notification"></div>
+
+  <header class="top-bar">
+    <div></div>
+    <a href="../index.html" class="profile-btn">Главная</a>
+  </header>
+
+  <div class="profile-container">
+    <div class="profile-left">
+      <img src="../images/avatar-placeholder.png" alt="Аватар" class="avatar" id="profile-avatar" />
+      <input type="text" id="nickname-input" placeholder="Введите никнейм" class="nickname-input" />
+      <input type="file" id="avatar-input" accept="image/*" class="avatar-upload" />
+      <div class="nickname-box">Никнейм</div>
+      <p class="profile-dates">Дата создания профиля<br>Дата последнего редактирования профиля</p>
+      <button id="logout-btn" class="btn">Выйти</button>
+    </div>
+
+    <div class="profile-right">
+      <div class="info-box">
+        <label>Имя</label>
+        <input type="text" id="name" readonly value="Иван" />
+        <label>Фамилия</label>
+        <input type="text" id="surname" readonly value="Иванов" />
+        <label>Email</label>
+        <input type="email" id="email" readonly value="ivan@example.com" />
+      </div>
+
+      <div class="profile-buttons">
+        <button class="btn" id="edit-profile-btn">Редактировать профиль</button>
+        <button class="btn wide-btn">Личные отзывы</button>
+      </div>
+    </div>
+  </div>
+
+<div id="auth-section" class="hidden">
+  
+    <div id="notification" class="notification"></div>
+<div class="auth-choice">
+    <button id="show-login" class="auth-btn">Войти</button>
+    <button id="show-register" class="auth-btn">Зарегистрироваться</button>
+  </div>
+
+  <div id="login-form" class="auth-form hidden">
+    <h2>Вход</h2>
+    <input type="email" id="login-email" placeholder="Email" />
+    <input type="password" id="login-password" placeholder="Пароль" />
+    <button id="login-submit" class="btn">Войти</button>
+  </div>
+
+  <div id="register-form" class="auth-form hidden">
+    <h2>Регистрация</h2>
+    <input type="text" id="reg-name" placeholder="Имя" />
+    <input type="text" id="reg-surname" placeholder="Фамилия" />
+    <input type="text" id="reg-nickname" placeholder="Никнейм" />
+    <input type="email" id="reg-email" placeholder="Email" />
+    <input type="password" id="reg-password" placeholder="Пароль" />
+    <button id="register-submit" class="btn">Зарегистрироваться</button>
+  </div>
+</div>
+
+
+  
+  <script src="profile.js" defer></script>
+</body>
+</html>
