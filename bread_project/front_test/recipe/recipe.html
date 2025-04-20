@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Карточка рецепта</title>
+  <link rel="stylesheet" href="recipe.css" />
+</head>
+<body class="recipe-body">
+  <header class="top-bar">
+    <button class="nav-btn" onclick="location.href='../index.html'">Главная</button>
+    <button class="nav-btn" onclick="location.href='../profile/profile.html'">Профиль</button>
+  </header>  
+
+  <main class="container">
+    <section class="recipe-left">
+      <div class="recipe-box">
+        <h2>Состав и рецепт</h2>
+        <p>Мука, вода, дрожжи, соль. Замесить, дать подойти, выпекать 40 минут.</p>
+        <p class="created-date">Дата создания: 20.04.2025</p>
+      </div>
+      <div class="rating-label">Рейтинг: 4.5 / 5</div>
+    </section>
+
+    <section class="recipe-right">
+      <div class="tabs">
+        <button id="tab-reviews" class="tab-btn active">Отзывы</button>
+        <button id="tab-rate" class="tab-btn">Оценить</button>
+      </div>
+
+      <div id="reviews-section" class="tab-section">
+        <div class="review">
+          <div class="review-header">Иванов Иван, 52.02.2052 <span class="stars">★★★★★</span></div>
+          <div class="review-text">Очень вкусный хлеб! Рекомендую!</div>
+        </div>
+      </div>
+
+      <div id="rate-section" class="tab-section hidden">
+        <div class="star-rating" id="star-rating">
+          <span data-value="1">&#9734;</span>
+          <span data-value="2">&#9734;</span>
+          <span data-value="3">&#9734;</span>
+          <span data-value="4">&#9734;</span>
+          <span data-value="5">&#9734;</span>
+        </div>
+        <textarea id="review-text" placeholder="Введите текст отзыва"></textarea>
+        <button class="submit-btn" onclick="addReview()">Добавить отзыв</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="notification" class="notification hidden"></div>
+  <script src="recipe.js"></script>
+</body>
+</html>
