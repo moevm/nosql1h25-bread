@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "user_profile.apps.UserProfileConfig",
+    "bread.apps.BreadConfig",
     "homepage.apps.HomepageConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -55,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "bread_project.urls"
+
+TEMPLATES_DIR = BASE_DIR / "templates"
 
 TEMPLATES = [
     {
