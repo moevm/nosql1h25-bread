@@ -83,9 +83,16 @@ WSGI_APPLICATION = "bread_project.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': os.getenv('MONGO_DB'),
+        'CLIENT': {
+            'host': os.getenv('MONGO_HOST'),
+            'port': int(os.getenv('MONGO_PORT')),
+            'username': os.getenv('MONGO_USERNAME'),
+            'password': os.getenv('MONGO_PASSWORD'),
+            'authSource': 'admin',
+        }
     }
 }
 

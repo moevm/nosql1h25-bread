@@ -3,6 +3,7 @@
 import os
 import sys
 
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bread_project.settings')
@@ -14,15 +15,6 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-
-    # --- НАЧАЛО: инициализация MongoDB -----------------------
-    try:
-        from init_db import init_collections
-        init_collections()
-    except Exception as e:
-        sys.stderr.write(f"[MongoInit] warning: {e}\n")
-    # --- КОНЕЦ: инициализация MongoDB ------------------------
-
     execute_from_command_line(sys.argv)
 
 
