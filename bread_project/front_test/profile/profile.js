@@ -1,4 +1,3 @@
-
 function showNotification(message) {
   const note = document.getElementById("notification");
   if (!note) return;
@@ -25,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameField = document.getElementById("name");
   const surnameField = document.getElementById("surname");
   const emailField = document.getElementById("email");
+  const newPasswordInput = document.getElementById("new-password");
+  const passwordField = document.querySelector(".password-field");
 
   let editing = false;
 
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     editing = !editing;
 
     if (editing) {
+      if (passwordField) passwordField.classList.remove("hidden");
       editBtn.textContent = "Сохранить";
     } else {
       editBtn.textContent = "Редактировать профиль";
@@ -80,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showNotification("Пожалуйста, заполните все поля профиля");
         editing = true;
         editBtn.textContent = "Сохранить";
+        if (passwordField) passwordField.classList.remove("hidden");
         return;
       }
 
@@ -94,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       location.reload();
     }
 
-    [nameField, surnameField, emailField].forEach(field => {
+    [nameField, surnameField, emailField].forEach((field) => {
       if (field) field.readOnly = !editing;
     });
 
@@ -158,7 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (localStorage.getItem("email") === email && localStorage.getItem("password") === password) {
+    if (
+      localStorage.getItem("email") === email &&
+      localStorage.getItem("password") === password
+    ) {
       localStorage.setItem("isLoggedIn", "true");
       location.reload();
     } else {

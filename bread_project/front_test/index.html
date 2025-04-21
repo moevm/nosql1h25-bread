@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Хлебный сайт</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Хлебный сайт</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <header class="top-bar">
-        <div class="search-area">
-            <input type="text" placeholder="Поиск" class="search" />
-            <img src="images/filter-icon.png" class="filter-icon" alt="фильтр" onclick="toggleFilters()" />
-            
-            <div class="filter-dropdown" id="filterDropdown">
-              <label><input type="checkbox" value="ржаной" /> Ржаной</label>
-              <label><input type="checkbox" value="пшеничный" /> Пшеничный</label>
-              <label><input type="checkbox" value="бездрожжевой" /> Бездрожжевой</label>
-              <label><input type="checkbox" value="сладкий" /> Сладкий</label>
-            </div>
-          </div>
-          
-          <a href="./profile/profile.html" class="profile-btn">Профиль</a>
-      </header>
+      <div class="search-area">
+        <input type="text" placeholder="Поиск" class="search" />
+        <img
+          src="images/filter-icon.png"
+          class="filter-icon"
+          alt="фильтр"
+          onclick="toggleFilters()"
+        />
 
-  <main>
-    <div class="grid">
-    </div>
-  </main>
+        <div class="filter-dropdown" id="filterDropdown">
+          <label>Дата от: <input type="date" id="date-from" /></label>
+          <label>Дата до: <input type="date" id="date-to" /></label>
+          <label
+            >Рейтинг от:
+            <select id="rating-filter">
+              <option value="0">Любой</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+        </div>
+      </div>
 
-  <script src="scripts.js"></script>
-</body>
+      <a href="./profile/profile.html" class="profile-btn">Профиль</a>
+    </header>
+
+    <main>
+      <div class="grid">
+      </div>
+    </main>
+
+    <script src="scripts.js"></script>
+  </body>
 </html>

@@ -3,10 +3,15 @@ function showNotification(message) {
   if (!note) return;
 
   note.textContent = message;
-  note.classList.remove("hidden");
+
+  note.classList.remove("visible");
+
+  void note.offsetWidth;
+
+  note.classList.add("visible");
 
   setTimeout(() => {
-    note.classList.add("hidden");
+    note.classList.remove("visible");
   }, 3000);
 }
 
@@ -31,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const stars = document.querySelectorAll("#star-rating span");
-  stars.forEach(star => {
+  stars.forEach((star) => {
     star.addEventListener("click", () => {
       const value = parseInt(star.getAttribute("data-value"));
       document.getElementById("star-rating").setAttribute("data-score", value);
@@ -43,8 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function addReview() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  if (!isLoggedIn) {
+    window.location.href = "/profile/profile.html";
+    return;
+  }
+
   const text = document.getElementById("review-text").value.trim();
-  const score = parseInt(document.getElementById("star-rating").getAttribute("data-score")) || 0;
+  const score =
+    parseInt(
+      document.getElementById("star-rating").getAttribute("data-score")
+    ) || 0;
 
   if (!text || score === 0) {
     showNotification("Введите текст и выберите оценку!");
@@ -64,8 +78,22 @@ function addReview() {
 
   document.getElementById("reviews-section").appendChild(reviewBlock);
   document.getElementById("review-text").value = "";
-  document.querySelectorAll("#star-rating span").forEach(s => s.classList.remove("selected"));
+  document
+    .querySelectorAll("#star-rating span")
+    .forEach((s) => s.classList.remove("selected"));
   document.getElementById("star-rating").setAttribute("data-score", "0");
 
   showNotification("Отзыв добавлен!");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const addReviewBtn = document.getElementById("add-review");
+
+  addReviewBtn?.addEventListener("click", (e) => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (!isLoggedIn) {
+      e.preventDefault();
+      window.location.href = "/profile/profile.html";
+    }
+  });
+});
