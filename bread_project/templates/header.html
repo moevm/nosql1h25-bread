@@ -1,0 +1,11 @@
+<!-- templates/partials/header.html -->
+<header>
+    <h1><a href="{% url 'recipes' %}">Хлебные рецепты</a></h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'recipes' %}">Главная</a></li>
+            <li><a href="{% url 'add_recipe' %}">Добавить рецепт</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<main>
+  <header class="top-bar">
+    <div class="search-area">
+      <input type="text" placeholder="Поиск" class="search" />
+      <img
+        src="{% static 'images/filter-icon.png' %}"
+        class="filter-icon"
+        alt="фильтр"
+        onclick="toggleFilters()"
+      />
+      <div class="filter-dropdown" id="filterDropdown">
+        <label>Дата от: <input type="date" id="date-from" /></label>
+        <label>Дата до: <input type="date" id="date-to" /></label>
+        <label>
+          Рейтинг от:
+          <select id="rating-filter">
+            <option value="0">Любой</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <a href="{% url 'profile' %}" class="profile-btn">Профиль</a>
+  </header>
+
+  <div class="grid">
+    {% for recipe in recipes %}
+    <a href="{% url 'bread_detail' recipe.id %}" class="card-link">
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="{% static recipe.image %}" alt="{{ recipe.name }}" />
+            <p>{{ recipe.name }}</p>
+          </div>
+          <div class="card-back">
+            <p>{{ recipe.description|truncatewords:10 }}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</main>
+
+<script src="{% static 'scripts.js' %}"></script>
+{% endblock %}
