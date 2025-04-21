@@ -37,7 +37,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "user_profile.apps.UserProfileConfig",
     "bread.apps.BreadConfig",
-    "homepage.apps.HomepageConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -83,16 +82,16 @@ WSGI_APPLICATION = "bread_project.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': os.getenv('MONGO_DB'),
-        'CLIENT': {
-            'host': os.getenv('MONGO_HOST'),
-            'port': int(os.getenv('MONGO_PORT')),
-            'username': os.getenv('MONGO_USERNAME'),
-            'password': os.getenv('MONGO_PASSWORD'),
-            'authSource': 'admin',
-        }
+    "default": {
+        "ENGINE": "djongo",
+        "NAME": os.getenv("MONGO_DB"),
+        "CLIENT": {
+            "host": os.getenv("MONGO_HOST"),
+            "port": int(os.getenv("MONGO_PORT")),
+            "username": os.getenv("MONGO_USERNAME"),
+            "password": os.getenv("MONGO_PASSWORD"),
+            "authSource": "admin",
+        },
     }
 }
 
