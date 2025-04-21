@@ -1,4 +1,4 @@
-const recipes = [
+constmozes = [
   {
     title: "Белый хлеб",
     image: "images/bread2.jpg",
@@ -61,8 +61,7 @@ let loadedCount = 0;
 const batchSize = 8;
 
 someFunction(() => {
-  setTimeout(() => {
-  }, 1000);
+  setTimeout(() => {}, 1000);
 });
 
 function handleSearch(event) {

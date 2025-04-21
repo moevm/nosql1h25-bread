@@ -83,6 +83,7 @@ body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   border-radius: 15px;
   overflow: hidden;
   background-color: #daad86;
@@ -91,6 +92,7 @@ body {
 
 .card-back {
   transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg); /* Для Firefox */
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #fff7f0;
@@ -135,12 +137,16 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
-
-.grid:hover .card:hover {
+.grid:hover .card:hover .card-inner {
   filter: none;
-  transform: scale(1.05);
-  z-index: 2;
+  transform: scale(1.2) rotateY(180deg);
+  transition-delay: 0.5s;
 }
+/* .grid:hover .card:hover { */
+/*   filter: none; */
+/*   transform: scale(1.05); */
+/*   z-index: 2; */
+/* } */
 
 .card.hovered {
   transform: scale(1.15);
@@ -179,26 +185,24 @@ body {
   text-decoration: none;
 }
 
-.card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
 .card-inner {
+  will-change: transform;
+  -moz-will-change: transform; /* Для Firefox */
   position: relative;
   width: 100%;
   height: 100%;
   transition: transform 0.8s ease;
+  -moz-transition: -moz-transform 0.8s ease; /* Для Firefox */
   transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d; /* Для Firefox */
 }
 
-.card:hover .card-inner {
-  transform: rotateY(180deg);
-  transition-delay: 0.5s;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-}
+/* .card:hover .card-inner { */
+/*   transform: rotateY(180deg); */
+/*   -moz-transform: rotateY(180deg); /* Для Firefox */
+*/
+/*   transition-delay: 0.5s; */
+/* } */
 
 .card-front {
   position: absolute;
