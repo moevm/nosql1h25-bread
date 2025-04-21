@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Хлебный сайт</title>
+        <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    </head>
+    <body>
+        <header class="top-bar">
+            <div class="search-area">
+                <input type="text" placeholder="Поиск" class="search" />
+                <img src="{% static "img/filter-icon.png" %}"
+                     class="filter-icon"
+                     alt="фильтр"
+                     onclick="toggleFilters()" />
+                <div class="filter-dropdown" id="filterDropdown">
+                    <label>
+                        Дата от:
+                        <input type="date" id="date-from" />
+                    </label>
+                    <label>
+                        Дата до:
+                        <input type="date" id="date-to" />
+                    </label>
+                    <label>
+                        Рейтинг от:
+                        <select id="rating-filter">
+                            <option value="0">Любой</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <a href="{% url 'user_profile:show_profile' %}" class="profile-btn">Профиль</a>
+        </header>
+        <main>
+            <div class="grid">
+                <a href="{% url 'bread:bread_detail' 1 %}" class="card-link">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <img src="{% static "img/bread1.jpg" %}" alt="Чиабатта" />
+                                <p>Чиабатта</p>
+                            </div>
+                            <div class="card-back">
+                                <p>Оливковое масло, мука...</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'bread:bread_detail' 2 %}" class="card-link">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <img src="{% static "img/bread2.jpg" %}" alt="Чиабатта" />
+                                <p>Чиабатта</p>
+                            </div>
+                            <div class="card-back">
+                                <p>Оливковое масло, мука...</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </main>
+        <script src="{% static "js/script.js" %}"></script>
+    </body>
+</html>
