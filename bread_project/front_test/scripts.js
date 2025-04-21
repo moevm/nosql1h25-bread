@@ -60,101 +60,29 @@ const recipes = [
 let loadedCount = 0;
 const batchSize = 8;
 
-function renderBatch() {
-  const container = document.querySelector(".grid");
-  const dateFrom = document.getElementById("date-from")?.value;
-  const dateTo = document.getElementById("date-to")?.value;
-  const ratingMin = parseFloat(
-    document.getElementById("rating-filter")?.value || 0
-  );
-
-  const fromDate = dateFrom ? new Date(dateFrom) : null;
-  const toDate = dateTo ? new Date(dateTo) : null;
-
-  const filtered = recipes.filter((recipe) => {
-    const recipeDate = new Date(recipe.date);
-    return (
-      (!fromDate || recipeDate >= fromDate) &&
-      (!toDate || recipeDate <= toDate) &&
-      recipe.rating >= ratingMin
-    );
-  });
-
-  const slice = filtered.slice(loadedCount, loadedCount + batchSize);
-
-  slice.forEach((recipe) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("data-title", recipe.title.toLowerCase());
-
-    card.onclick = () => goToRecipe();
-
-    card.innerHTML = `
-          <div class="card-inner">
-              <div class="card-front">
-                  <img src="${recipe.image}" alt="${recipe.title}" />
-                  <p>${recipe.title}</p>
-              </div>
-              <div class="card-back">
-                  <p>${recipe.description}</p>
-              </div>
-          </div>
-      `;
-
-    container.appendChild(card);
-  });
-
-  loadedCount += batchSize;
-
-  document.querySelectorAll(".card").forEach((card) => {
-    let hoverTimer;
-
-    card.addEventListener("mouseenter", () => {
-      hoverTimer = setTimeout(() => {
-        card.classList.add("flip", "hovered");
-
-        document.querySelectorAll(".card").forEach((otherCard) => {
-          if (otherCard !== card) {
-            otherCard.classList.add("blur");
-          }
-        });
-      }, 2000);
-    });
-
-    card.addEventListener("mouseleave", () => {
-      clearTimeout(hoverTimer);
-      card.classList.remove("flip", "hovered");
-
-      document.querySelectorAll(".card").forEach((card) => {
-        card.classList.remove("blur");
-      });
-    });
-  });
-}
-
-function handleScroll() {
-  const nearBottom =
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
-  if (nearBottom && loadedCount < recipes.length) {
-    renderBatch();
-  }
-}
-
-function goToRecipe() {
-  window.location.href = "/recipe/recipe.html";
-}
+someFunction(() => {
+  setTimeout(() => {
+  }, 1000);
+});
 
 function handleSearch(event) {
   const query = event.target.value.toLowerCase();
-  document.querySelectorAll(".card").forEach((card) => {
-    const title = card.getAttribute("data-title");
-    card.style.display = title.includes(query) ? "" : "none";
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderBatch();
-  window.addEventListener("scroll", handleScroll);
+  document.querySelectorAll(".card").forEach((card) => {
+    let timer;
+    card.addEventListener("mouseenter", () => {
+      timer = setTimeout(() => {
+        card.classList.add("flipped");
+      }, 1000);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      clearTimeout(timer);
+      card.classList.remove("flipped");
+    });
+  });
 
   const searchInput = document.querySelector(".search");
   searchInput.addEventListener("input", handleSearch);
@@ -163,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id)?.addEventListener("change", () => {
       document.querySelector(".grid").innerHTML = "";
       loadedCount = 0;
-      renderBatch();
     });
   });
 });
@@ -183,8 +110,9 @@ document.addEventListener("click", (e) => {
 });
 
 const grid = document.querySelector(".grid");
-grid.addEventListener("mouseleave", () => {
-  document.querySelectorAll(".card").forEach((card) => {
-    card.classList.remove("hovered", "blur");
-  });
+grid.addEventListener("mouseleave", () => {});
+
+card.addEventListener("mouseleave", () => {
+  clearTimeout(timer);
+  card.classList.remove("flipped");
 });
