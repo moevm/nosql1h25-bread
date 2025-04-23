@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="grid">
+        {% for bread in breads %}
+            <a href="{% url 'bread:bread_detail' forloop.counter %}"
+               class="card-link">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="{% static "img/bred1.jpg" %}" alt="{{ bread.title }}" />
+                            <p>{{ bread.title }}</p>
+                        </div>
+                        <div class="card-back">
+                            <p>{{ bread.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -18,9 +18,9 @@
                 <div class="recipe-box">
                     <h2>Состав и рецепт</h2>
                     <p>Мука, вода, дрожжи, соль. Замесить, дать подойти, выпекать 40 минут.</p>
-                    <p class="created-date">Дата создания: 20.04.2025</p>
+                    <p class="created-date">Дата создания: {{ bread.date|date:"d.m.Y" }}</p>
                 </div>
-                <div class="rating-label">Рейтинг: 4.5 / 5</div>
+                <div class="rating-label">Рейтинг: {{ bread.rating }} / 5</div>
             </section>
             <section class="recipe-right">
                 <div class="tabs">
