@@ -17,10 +17,11 @@
             <section class="recipe-left">
                 <div class="recipe-box">
                     <h2>Состав и рецепт</h2>
-                    <p>Мука, вода, дрожжи, соль. Замесить, дать подойти, выпекать 40 минут.</p>
-                    <p class="created-date">Дата создания: {{ bread.date|date:"d.m.Y" }}</p>
+                    <p>{{ bread.Composition }}</p>
+                    <p>{{ bread.Recipe }}</p>
+                    <p class="created-date">Дата создания: {{ bread.Date|date:"d.m.Y" }}</p>
                 </div>
-                <div class="rating-label">Рейтинг: {{ bread.rating }} / 5</div>
+                <div class="rating-label">Рейтинг: {{ bread.Rating }} / 5</div>
             </section>
             <section class="recipe-right">
                 <div class="tabs">

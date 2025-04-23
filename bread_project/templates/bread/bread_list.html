@@ -8,11 +8,11 @@
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="{% static "img/bred1.jpg" %}" alt="{{ bread.title }}" />
-                            <p>{{ bread.title }}</p>
+                            <img src="{% static bread.Image %}" alt="{{ bread.Title }}" />
+                            <p>{{ bread.Title }}</p>
                         </div>
                         <div class="card-back">
-                            <p>{{ bread.description }}</p>
+                            <p>{{ bread.Composition|truncatewords:20 }}</p>
                         </div>
                     </div>
                 </div>
