@@ -1,10 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block top_bar_left %}
+    <div class="search-area">
+        <form method="get" action="" style="display:inline;">
+            <input type="text" placeholder="Поиск" class="search" name="q" value="{{ query|default:'' }}" />
+            <input type="date" name="date-from" id="date-from" value="{{ date_from|default:'' }}" />
+            <input type="date" name="date-to" id="date-to" value="{{ date_to|default:'' }}" />
+            <select name="rating-filter" id="rating-filter">
+                <option value="0" {% if rating == '0' or not rating %}selected{% endif %}>Любой</option>
+                <option value="1" {% if rating == '1' %}selected{% endif %}>1+</option>
+                <option value="2" {% if rating == '2' %}selected{% endif %}>2+</option>
+                <option value="3" {% if rating == '3' %}selected{% endif %}>3+</option>
+                <option value="4" {% if rating == '4' %}selected{% endif %}>4+</option>
+                <option value="5" {% if rating == '5' %}selected{% endif %}>5</option>
+            </select>
+            <button type="submit">Найти</button>
+        </form>
+    </div>
+{% endblock %}
+
 {% block content %}
     <div class="grid">
         {% for bread in breads %}
-            <a href="{% url 'bread:bread_detail' forloop.counter %}"
-               class="card-link">
+            <a href="{% url 'bread:bread_detail' forloop.counter %}" class="card-link">
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
