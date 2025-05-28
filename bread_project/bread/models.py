@@ -15,7 +15,8 @@ class Recipe(models.Model):
     Composition= models.TextField()
     Date       = models.DateTimeField(auto_now_add=True)
     Recipe     = models.TextField()
-    Rate       = models.IntegerField()
+    Rate       = models.FloatField()
+    Image      = models.CharField(max_length=200)
     CommentIDs = models.ArrayField(
         model_container=IntItem,
         default=list
