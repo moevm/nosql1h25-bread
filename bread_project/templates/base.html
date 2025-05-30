@@ -13,9 +13,9 @@
             {% block top_bar_left %}{% endblock %}
           
             {% if user.is_authenticated %}
-                <a href="{% url 'user_profile:show_profile' %}" class="profile-btn">Профиль2</a>
+                <a href="{% url 'user_profile:show_profile' %}" class="profile-btn">Профиль</a>
             {% else %}
-                <a href="{% url 'user_profile:pre_registration' %}" class="profile-btn">Профиль1</a>
+                <a href="{% url 'user_profile:pre_registration' %}" class="profile-btn">Профиль</a>
             {% endif %}
         </header>
         
