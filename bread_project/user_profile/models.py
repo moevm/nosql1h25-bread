@@ -10,14 +10,13 @@ class IntItem(models.Model):
 
 
 class MyUser(AbstractUser):
-    # id = models.CharField(primary_key=True, max_length=24, default=lambda: str(ObjectId()))
     username = models.CharField("Никнейм", max_length=30, blank=False, unique=True)
     email = models.EmailField(
         "Email",
         blank=False,
         unique=True,
         max_length=254,
-    )  # Делаем email уникальным
+    )
     first_name = models.CharField("Имя", max_length=30, blank=False)
     last_name = models.CharField("Фамилия", max_length=150, blank=False)
     update_at = models.DateTimeField(auto_now=True)
