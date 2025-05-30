@@ -57,6 +57,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "bread_project.urls"
 
+
+AUTH_USER_MODEL = "user_profile.MyUser"
+LOGOUT_REDIRECT_URL = "bread:bread_list"
+LOGIN_REDIRECT_URL = "user_profile:show_profile"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 TEMPLATES = [
@@ -120,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru-RU"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 
 USE_I18N = True
 

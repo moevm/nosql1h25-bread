@@ -1,12 +1,7 @@
 from djongo import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-
-class IntItem(models.Model):
-    value = models.IntegerField()
-
-    class Meta:
-        abstract = True
 
 
 class Recipe(models.Model):
@@ -24,5 +19,19 @@ class Recipe(models.Model):
 
     class Meta:
         db_table = 'Recipe'
-
-
+  
+# class IntItem(models.Model):
+#     value = models.IntegerField()
+#
+#
+# class Comment(models.Model):
+#     CommentID = models.CharField(primary_key=True, max_length=50)
+#     Username = models.CharField(max_length=100)
+#     Text = models.TextField()
+#     Rating = models.IntegerField()
+#     Date = models.DateTimeField(auto_now_add=True)
+#     RecipeID = models.CharField(max_length=50)
+#     Title = models.CharField(max_length=200)
+#
+#     class Meta:
+#         db_table = "Comment"

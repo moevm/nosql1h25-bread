@@ -1,0 +1,14 @@
+{% extends "user_profile/base_profile.html" %}
+{% block login %}
+    <div class="auth-form">
+        <!-- В атрибуте action указываем адрес, куда должен отправляться запрос. -->
+        <form method="post" action="{% url 'login' %}" class='auth-form'>
+            <h1>Вход</h1>
+            {% csrf_token %} {{ form }}
+            <!-- В скрытом поле передаём параметр next,
+          это URL для переадресации после логина. -->
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button class='btn' type="submit">Войти</button>
+        </form>
+    </div>
+{% endblock %}

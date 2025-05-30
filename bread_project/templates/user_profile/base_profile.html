@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Профиль</title>
+        <link rel="stylesheet" href="{% static "css/profile.css" %}" />
+    </head>
+    <body class="profile-body">
+        <div id="notification" class="notification"></div>
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <button class="profile-btn" onclick="history.back()">Назад</button>
+            </div>
+            <a href="{% url "bread:bread_list" %}" class="profile-btn">Главная</a>
+        </header>
+        {% block edit %}{% endblock %}
+        {% block show %}{% endblock %}
+        {% block pre_registration %}{% endblock %}
+        {% block login %}{% endblock %}
+    </body>
+</html>
