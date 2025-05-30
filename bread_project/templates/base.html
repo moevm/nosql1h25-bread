@@ -37,7 +37,11 @@
                     </label>
                 </div>
             </div>
-            <a href="{% url 'user_profile:show_profile' %}" class="profile-btn">Профиль</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'user_profile:show_profile' %}" class="profile-btn">Профиль2</a>
+            {% else %}
+                <a href="{% url 'user_profile:pre_registration' %}" class="profile-btn">Профиль1</a>
+            {% endif %}
         </header>
         <main>
             {% block content %}

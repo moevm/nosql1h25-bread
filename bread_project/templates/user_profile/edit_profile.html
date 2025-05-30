@@ -1,0 +1,51 @@
+{% extends "user_profile/base_profile.html" %}
+{% load static %}
+{% block edit %}
+    <form class='profile-container' method="post">
+        {% csrf_token %}
+        <div class="profile-left">
+            <img src="{% static "img/avatar-placeholder.png" %}"
+                 alt="Аватар"
+                 class="avatar"
+                 id="profile-avatar" />
+            <div id="nickname-input" class="nickname-box">{{ form.username }}</div>
+            <input type="file"
+                   id="avatar-input"
+                   accept="{% static "img/*" %}"
+                   class="avatar-upload" />
+            <div class="nickname-box">{{ user.username }}</div>
+            <p class="profile-dates">
+                Дата создания профиля
+                <br>
+                {{ user.date_joined }}
+                <br>
+                Дата последнего редактирования профиля
+                <br>
+                {{ user.update_at }}
+            </p>
+        </div>
+        <div class="profile-right">
+            <div class="info-box">
+                <label>{{ form.first_name.label_tag }}</label>
+                <div id='name'>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+                <label>{{ form.last_name.label_tag }}</label>
+                <div id='surname'>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+                <label>{{ form.email.label_tag }}</label>
+                <div id='email'>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+            </div>
+            <div class="profile-buttons">
+                <button class='btn' type="submit">Сохранить</button>
+                <button class="btn wide-btn">Личные отзывы</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
