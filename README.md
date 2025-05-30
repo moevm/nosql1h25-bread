@@ -21,3 +21,25 @@
 логин: test
 
 пароль: qwer7890
+
+## Запуск проекта
+
+Все команды приведеные ниже прописываются в корне директории
+
+Создание виртуальный среды
+```bash
+python3 -m venv venv
+```
+Запуск виртуальой среды
+```bash
+source venv/bin/activate
+```
+Установка зависимостей
+```bash
+pip3 install -r requirements.txt
+```
+Запуск контейнеров
+```bash
+docker-compose up --build -d
+```
+После запуска контейнеров перейти на [localhost](http://localhost:8000/)
