@@ -238,5 +238,23 @@
       "Rate": 4.7,
       "Image": "img/bread20.jpg"
     }
+  },
+  {
+    "model": "user_profile.myuser",
+    "fields":{
+    "id": 1,
+    "password": "pbkdf2_sha256$216000$fypxRmR8iwua$our0CzwzduvokZxs4+WQXSrI7JYBmQp9Xlase67ukYc=",
+    "last_login": "2025-05-30T22:44:15.628Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-05-30T22:44:15.482Z",
+    "username": "test",
+    "email": "test@yandex.ru",
+    "first_name": "test",
+    "last_name": "test",
+    "update_at": "2025-05-30T22:44:15.620Z",
+    "comments": []
+    }
   }
 ]
