@@ -1,6 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
-from django import forms
 
 # Получаем модель пользователя:
 User = get_user_model()
