@@ -1,0 +1,7 @@
+{% extends "user_profile/base_profile.html" %}
+{% block pre_registration %}
+    <div class="auth-choice">
+        <a class="btn" href="{% url 'login' %}">Войти</a>
+        <a class="btn" href="{% url 'registration' %}">Зарегистрироваться</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "user_profile/base_profile.html" %}
+{% block login %}
+    <div id="auth-section">
+        <form method="post" class="auth-form">
+            <h1>Регистрация</h1>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" id="register-submit" class="btn">Зарегистрироваться</button>
+        </form>
+    </div>
+{% endblock %}
