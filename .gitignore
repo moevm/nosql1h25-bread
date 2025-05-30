@@ -6,6 +6,11 @@ __pycache__
 db.sqlite3
 media
 
+# Исключаем все файлы миграций, кроме __init__.py
+*/migrations/*.py
+!*/migrations/__init__.py
+*/migrations/__pycache__/
+
 # Backup files # 
 *.bak 
 
