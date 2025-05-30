@@ -1,179 +1,45 @@
-from django.shortcuts import render
-import datetime
+from django.shortcuts import render, get_object_or_404
+from .models import Recipe
+from django.db.models import Q
+from django.utils.dateparse import parse_date
+from datetime import datetime
 
 # Create your views here.
 
-breads = [
-    {
-        "Title": "Белый хлеб",
-        "Composition": "Мука пшеничная – 500 г, Вода – 300 мл, Дрожжи сухие – 1 ч. л., Сахар – 1 ст. л., Соль – 1 ч. л., Масло растительное – 2 ст. л.",
-        "Date": datetime.datetime(2024, 4, 10),
-        "Recipe": "1. Растворить дрожжи и сахар в тёплой воде, дать постоять 10 минут. 2. Добавить муку, соль и масло. Замесить тесто. 3. Оставить подходить на 1–1,5 часа. 4. Сформировать буханку и выпекать при 180°C около 30–35 минут.",
-        "Rating": 4.3,
-        "Image": "img/bread1.jpg",
-    },
-    {
-        "Title": "Чиабатта",
-        "Composition": "Мука – 500 г, Вода – 400 мл, Дрожжи – 5 г, Соль – 1 ч. л., Оливковое масло – 2 ст. л.",
-        "Date": datetime.datetime(2024, 4, 15),
-        "Recipe": "1. Замесить липкое тесто. Оставить на 12–18 часов при комнатной температуре. 2. Разделить, аккуратно сформировать лепешки, оставить на 1 час. 3. Выпекать при 220°C 25–30 минут.",
-        "Rating": 3.8,
-        "Image": "img/bread2.jpg",
-    },
-    {
-        "Title": "Бублик",
-        "Composition": "Мука – 500 г, Вода – 250 мл, Дрожжи – 1 ч. л., Сахар – 2 ст. л., Соль – 1 ч. л., Яйцо – 1 шт.",
-        "Date": datetime.datetime(2024, 4, 20),
-        "Recipe": "1. Замесить тесто, дать подойти 1 час. 2. Сформировать кольца, отварить 1–2 минуты в кипятке. 3. Смазать яйцом и выпекать при 200°C 20 минут.",
-        "Rating": 4.3,
-        "Image": "img/bread3.jpg",
-    },
-    {
-        "Title": "Ржаной хлеб",
-        "Composition": "Ржаная мука – 400 г, Пшеничная мука – 100 г, Вода – 300 мл, Закваска или дрожжи – 1 ч. л., Соль – 1 ч. л., Мёд – 1 ст. л.",
-        "Date": datetime.datetime(2024, 4, 22),
-        "Recipe": "1. Замесить плотное тесто, оставить подходить на 2–3 часа. 2. Выпекать при 200°C около 40 минут.",
-        "Rating": 3.5,
-        "Image": "img/bread4.jpg",
-    },
-    {
-        "Title": "Фокачча",
-        "Composition": "Мука – 500 г, Вода – 300 мл, Дрожжи – 1 ч. л., Соль – 1 ч. л., Оливковое масло – 4 ст. л., Розмарин, оливки – по вкусу",
-        "Date": datetime.datetime(2024, 4, 25),
-        "Recipe": "1. Замесить мягкое тесто, дать подойти 1–1,5 часа. 2. Разложить в форму, сделать углубления пальцами, полить маслом. 3. Посыпать розмарином и оливками. Выпекать при 200°C 25–30 минут.",
-        "Rating": 4.8,
-        "Image": "img/bread5.jpg",
-    },
-    {
-        "Title": "Батон",
-        "Composition": "Мука – 400 г, Вода – 250 мл, Дрожжи – 1 ч. л., Сахар – 1 ч. л., Соль – 1 ч. л., Масло сливочное – 30 г, Яйцо – 1 шт. (для смазывания)",
-        "Date": datetime.datetime(2024, 4, 30),
-        "Recipe": "1. Замесить тесто, дать подойти 1 час. 2. Сформировать батон, сделать надрезы, смазать яйцом. 3. Выпекать при 180°C 25–30 минут.",
-        "Rating": 3.5,
-        "Image": "img/bread6.jpg",
-    },
-    {
-        "Title": "Бриошь",
-        "Composition": "Мука – 400 г, Яйца – 4 шт., Масло сливочное – 200 г, Сахар – 50 г, Дрожжи – 1 ч. л., Соль – 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 1),
-        "Recipe": "1. Замешивать тесто долго, охлаждать в холодильнике 6–12 часов. 2. Сформировать шарики, выложить в форму. 3. Выпекать при 180°C 30 минут.",
-        "Rating": 3.2,
-        "Image": "img/bread7.jpg",
-    },
-    {
-        "Title": "Лепёшка",
-        "Composition": "Мука – 300 г, Вода – 150 мл, Соль – 0.5 ч. л., Масло – 2 ст. л.",
-        "Date": datetime.datetime(2024, 4, 15),
-        "Recipe": "1. Замесить простое тесто, оставить на 30 минут. 2. Раскатать в лепешки, обжарить на сковороде или выпекать при 220°C 10 минут.",
-        "Rating": 3.8,
-        "Image": "img/bread8.jpg",
-    },
-    {
-        "Title": "Багет",
-        "Composition": "Мука — 500 г, вода — 300 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 5),
-        "Recipe": "1. Замесить тесто, дать подойти 1,5 часа. 2. Сформировать длинные палочки, надрезать. 3. Выпекать при 220°C 25 минут.",
-        "Rating": 4.1,
-        "Image": "img/bread9.jpg",
-    },
-    {
-        "Title": "Кукурузный хлеб",
-        "Composition": "Пшеничная мука — 300 г, кукурузная — 200 г, вода — 300 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 6),
-        "Recipe": "1. Замесить тесто из двух видов муки, дать подойти. 2. Сформировать буханку, выпекать при 180°C 35 минут.",
-        "Rating": 4.0,
-        "Image": "img/bread10.jpg",
-    },
-    {
-        "Title": "Лаваш",
-        "Composition": "Мука — 500 г, вода — 250 мл, соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 7),
-        "Recipe": "1. Замесить тесто, дать отдохнуть 30 минут. 2. Раскатать тонко, обжарить на сухой сковороде.",
-        "Rating": 4.5,
-        "Image": "img/bread11.jpg",
-    },
-    {
-        "Title": "Сдобная булка",
-        "Composition": "Мука — 400 г, молоко — 200 мл, дрожжи — 1 ч. л., сахар — 3 ст. л., масло — 50 г, яйцо — 1 шт.",
-        "Date": datetime.datetime(2024, 5, 8),
-        "Recipe": "1. Замесить сладкое тесто, дать подойти. 2. Сформировать булки, смазать яйцом. 3. Выпекать при 180°C 20–25 минут.",
-        "Rating": 4.2,
-        "Image": "img/bread12.jpg",
-    },
-    {
-        "Title": "Картофельный хлеб",
-        "Composition": "Мука — 400 г, картофель варёный — 200 г, вода — 200 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 9),
-        "Recipe": "1. Размять картофель, смешать с ингредиентами. 2. Дать подойти, выпекать при 190°C 35 минут.",
-        "Rating": 3.9,
-        "Image": "img/bread13.jpg",
-    },
-    {
-        "Title": "Ирландский содовый хлеб",
-        "Composition": "Мука — 500 г, кефир — 400 мл, сода — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 10),
-        "Recipe": "1. Быстро замесить тесто, сформировать шар. 2. Выпекать при 200°C около 35 минут.",
-        "Rating": 4.4,
-        "Image": "img/bread14.jpg",
-    },
-    {
-        "Title": "Хлеб с сыром",
-        "Composition": "Мука — 400 г, тёртый сыр — 150 г, вода — 250 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 11),
-        "Recipe": "1. Замесить тесто с сыром, дать подойти. 2. Сформировать хлеб, выпекать при 180°C 30 минут.",
-        "Rating": 4.6,
-        "Image": "img/bread15.jpg",
-    },
-    {
-        "Title": "Цельнозерновой хлеб",
-        "Composition": "Цельнозерновая мука — 500 г, вода — 300 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 12),
-        "Recipe": "1. Замесить плотное тесто, дать подойти. 2. Выпекать при 200°C 40 минут.",
-        "Rating": 3.7,
-        "Image": "img/bread16.jpg",
-    },
-    {
-        "Title": "Хлеб с орехами",
-        "Composition": "Мука — 500 г, грецкие орехи — 100 г, вода — 300 мл, дрожжи — 1 ч. л., соль — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 13),
-        "Recipe": "1. Замесить тесто, добавить орехи. 2. Выпекать при 180°C 35 минут.",
-        "Rating": 4.0,
-        "Image": "img/bread17.jpg",
-    },
-    {
-        "Title": "Хлеб с чесноком и травами",
-        "Composition": "Мука — 450 г, вода — 280 мл, дрожжи — 1 ч. л., чеснок — 3 зубчика, травы — по вкусу.",
-        "Date": datetime.datetime(2024, 5, 14),
-        "Recipe": "1. Замесить тесто, добавить чеснок и травы. 2. Выпекать при 200°C 30 минут.",
-        "Rating": 4.3,
-        "Image": "img/bread18.jpg",
-    },
-    {
-        "Title": "Дубайский кулич",
-        "Composition": "Мука — 300 г, сахар — 100 г, яйца — 2 шт., сливочное масло — 100 г, молоко — 100 мл, дрожжи — 1 ч. л., тесто катаифи — 150 г, фисташковая паста — 100 г, кардамон — 0.5 ч. л., шафран — щепотка, соль — 0.5 ч. л.",
-        "Date": datetime.datetime(2024, 5, 15),
-        "Recipe": "1. Замочить шафран в тёплом молоке, добавить дрожжи и 1 ч. л. сахара, оставить на 10 минут. 2. Взбить яйца с сахаром, добавить масло, шафрановое молоко, муку, кардамон и соль, замесить тесто. 3. Оставить подходить на 1–1.5 часа. 4. Выложить в форму слоями: тесто, фисташковая паста, тесто катаифи. 5. Выпекать при 180°C около 35–40 минут до золотистой корочки. 6. Остудить и при желании украсить фисташками или глазурью.",
-        "Rating": 4.9,
-        "Image": "img/bread19.jpg",
-    },
-    {
-        "Title": "Пита",
-        "Composition": "Мука — 500 г, вода — 300 мл, дрожжи — 1 ч. л., соль — 1 ч. л., сахар — 1 ч. л.",
-        "Date": datetime.datetime(2024, 5, 16),
-        "Recipe": "1. Замесить тесто, дать подойти. 2. Раскатать лепешки, выпекать при 250°C 5–7 минут.",
-        "Rating": 4.7,
-        "Image": "img/bread20.jpg",
-    },
-]
-
-
 def bread_list(request):
     template = "bread/bread_list.html"
-    context = {"breads": breads}
+    query = request.GET.get('q', '')
+    date_from = request.GET.get('date-from', '')
+    date_to = request.GET.get('date-to', '')
+    rating = request.GET.get('rating-filter', '')
+
+    breads = Recipe.objects.all()
+    if query:
+        breads = breads.filter(
+            Q(Title__icontains=query) | Q(Composition__icontains=query)
+        )
+    # Фильтрация по дате и рейтингу в Python
+    if date_from:
+        date_from_obj = datetime.strptime(date_from, "%Y-%m-%d")
+        breads = [b for b in breads if b.Date.date() >= date_from_obj.date()]
+    if date_to:
+        date_to_obj = datetime.strptime(date_to, "%Y-%m-%d")
+        breads = [b for b in breads if b.Date.date() <= date_to_obj.date()]
+    if rating and rating.isdigit() and int(rating) > 0:
+        breads = [b for b in breads if b.Rate >= float(rating)]
+
+    context = {
+        "breads": breads,
+        "query": query,
+        "date_from": date_from,
+        "date_to": date_to,
+        "rating": rating,
+    }
     return render(request, template_name=template, context=context)
 
 
 def bread_detail(request, pk):
     template = "bread/bread_detail.html"
-    context = {"bread": breads[pk - 1]}
+    bread = get_object_or_404(Recipe, pk=pk)
+    context = {"bread": bread}
     return render(request, template_name=template, context=context)
