@@ -27,6 +27,10 @@
                 <div class="tabs">
                     <button id="tab-reviews" class="tab-btn active">Отзывы</button>
                     <button id="tab-rate" class="tab-btn">Оценить</button>
+                    <button class="nav-btn"
+                        onclick="location.href='{% url "bread:bread_list" %}?q={{ query }}&date-from={{ date_from }}&date-to={{ date_to }}&rating-filter={{ rating }}'">
+                        Назад к списку
+                    </button>
                 </div>
                 <div id="reviews-section" class="tab-section">
                     <div class="review">

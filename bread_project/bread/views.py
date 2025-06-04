@@ -52,5 +52,19 @@ def bread_list(request):
 def bread_detail(request, pk):
     template = "bread/bread_detail.html"
     bread = get_object_or_404(Recipe, pk=pk)
-    context = {"bread": bread}
+
+    # Забираем параметры фильтрации из GET-запроса
+    query = request.GET.get('q', '')
+    date_from = request.GET.get('date-from', '')
+    date_to = request.GET.get('date-to', '')
+    rating = request.GET.get('rating-filter', '')
+
+    context = {
+        "bread": bread,
+        "query": query,
+        "date_from": date_from,
+        "date_to": date_to,
+        "rating": rating,
+    }
     return render(request, template_name=template, context=context)
+
