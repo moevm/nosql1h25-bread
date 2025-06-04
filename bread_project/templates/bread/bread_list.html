@@ -5,9 +5,9 @@
     <div class="search-area">
         <form method="get" action="" style="display:inline;">
             <input type="text" placeholder="Поиск" class="search" name="q" value="{{ query|default:'' }}" />
-            <input type="date" name="date-from" id="date-from" value="{{ date_from|default:'' }}" />
-            <input type="date" name="date-to" id="date-to" value="{{ date_to|default:'' }}" />
-            <select name="rating-filter" id="rating-filter">
+            <input type="date" name="date-from" id="date-from" value="{{ date_from|default:'' }}" title="Фильтровать рецепты, опубликованные начиная с этой даты" />
+            <input type="date" name="date-to" id="date-to" value="{{ date_to|default:'' }}" title="Фильтровать рецепты, опубликованные до этой даты включительно"/>
+            <select name="rating-filter" id="rating-filter" title="Показываются рецепты с рейтингом не ниже выбранного">
                 <option value="0" {% if rating == '0' or not rating %}selected{% endif %}>Любой</option>
                 <option value="1" {% if rating == '1' %}selected{% endif %}>1+</option>
                 <option value="2" {% if rating == '2' %}selected{% endif %}>2+</option>
@@ -29,6 +29,7 @@
                         <div class="card-front">
                             <img src="{% static bread.Image %}" alt="{{ bread.Title }}" />
                             <p>{{ bread.Title }}</p>
+                            <p>{{ bread.Rate }}/5⭐</p>
                         </div>
                         <div class="card-back">
                             <p>{{ bread.Composition|truncatewords:20 }}</p>
