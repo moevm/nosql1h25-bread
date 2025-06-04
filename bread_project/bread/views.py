@@ -8,6 +8,17 @@ from datetime import datetime
 
 def bread_list(request):
     template = "bread/bread_list.html"
+    if request.GET.get("reset"):
+        # Если нажали сброс, игнорируем фильтры
+        breads = Recipe.objects.all()
+        context = {
+            "breads": breads,
+            "query": '',
+            "date_from": '',
+            "date_to": '',
+            "rating": '0',
+        }
+        return render(request, template_name=template, context=context)
     query = request.GET.get('q', '')
     date_from = request.GET.get('date-from', '')
     date_to = request.GET.get('date-to', '')
